@@ -133,8 +133,9 @@ def analyze_redirect() -> RedirectResponse:
 
 
 @app.post("/guardrail/analyze")
-def analyze(request: AnalyzeRequest) -> dict[str, object]:
-    return guardrail.evaluate_prompt(request.text, request.session_id)
+async def analyze(request: AnalyzeRequest) -> dict[str, object]:
+    """Async endpoint that directly calls the async guardrail evaluation without asyncio.run() overhead."""
+    return await guardrail.evaluate_prompt_async(request.text, request.session_id)
 
 
 @app.post("/v1/chat/completions")
@@ -158,6 +159,5 @@ async def process_prompt(request: InboundPromptRequest):
         ]
         async for chunk in guardrail.stream_output(chunks, request.session_id):
             yield chunk
-            await asyncio.sleep(0)
 
     return StreamingResponse(stream_chunks(), media_type="text/plain")
