@@ -1,0 +1,4 @@
+tau: 0.50
+weights: [0.30, 0.35, 0.25, 0.10]
+max_context_tokens: 4096
+canary_token: "kappa-123"
