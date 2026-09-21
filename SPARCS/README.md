@@ -3,11 +3,6 @@
 Official reference implementation, benchmark suites, and quantization pipeline for the manuscript:  
 **"SPARCS: Single-Pass Adaptive Risk Topology and Certifiable Security for Real-Time LLM Middleware"**  
 
-
-**Authors:** M. V. Vyas, M. H. Mehta (SVIT College, Gujarat Technological University)  
-**Repository:** [https://github.com/Meghavi965/SPARCS](https://github.com/Meghavi965/SPARCS) 
-**License:** [GNU Affero General Public License v3.0 (AGPL-3.0)](LICENSE)
-
 ---
 
 ## 1. Overview & Architectural Pipeline
