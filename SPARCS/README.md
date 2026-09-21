@@ -2,7 +2,7 @@
 
 Official reference implementation, benchmark suites, and quantization pipeline for the manuscript:  
 **"SPARCS: Single-Pass Adaptive Risk Topology and Certifiable Security for Real-Time LLM Middleware"**  
-*Submitted to Applied Intelligence (Springer, ISSN: 0924-669X)*
+
 
 **Authors:** M. V. Vyas, M. H. Mehta (SVIT College, Gujarat Technological University)  
 **Repository:** [https://github.com/Meghavi965/SPARCS](https://github.com/Meghavi965/SPARCS)[cite: 4]  
@@ -12,7 +12,7 @@ Official reference implementation, benchmark suites, and quantization pipeline f
 
 ## 1. Overview & Architectural Pipeline
 
-SPARCS addresses the security-latency trade-off in Large Language Model (LLM) middleware by replacing heavy multi-stage sequential evaluation loops ($\mathcal{O}(K)$ LLM calls) with a single-pass ($\mathcal{O}(1)$) disentangled manifold architecture:
+SPARCS addresses the security-latency trade-off in Large Language Model (LLM) middleware by replacing heavy multi-stage sequential evaluation loops ($\mathcal{O}(K)$ LLM calls) with a single-pass (O(1)) disentangled manifold architecture:
 
 * **Phase I: Single-Pass Disentangled Feature Extraction (SPDMD):** A single forward pass over a spectral-normalized transformer encoder (`microsoft/deberta-v3-base`) simultaneously derives pooled continuous embeddings ($E_P \in \mathbb{R}^{768}$) and intent classification logits ($z_P \in \mathbb{R}^2$) without secondary model roundtrips (<15 ms).
 * **Phase II: Parallel Inbound Risk Tiers ($L_1 - L_4$):** Evaluates privacy entity density ($L_1$, Microsoft Presidio NER), latent intent classification ($L_2$, dual-headed Softmax), angular semantic manifold divergence against a tenant policy centroid $\mu_\pi$ ($L_3$), and context length saturation ($L_4$)[cite: 4].
