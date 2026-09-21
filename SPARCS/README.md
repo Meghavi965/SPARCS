@@ -16,8 +16,7 @@ SPARCS addresses the security-latency trade-off in Large Language Model (LLM) mi
 
 * **Phase I: Single-Pass Disentangled Feature Extraction (SPDMD):** A single forward pass over a spectral-normalized transformer encoder (`microsoft/deberta-v3-base`) simultaneously derives pooled continuous embeddings ($E_P \in \mathbb{R}^{768}$ ) and intent classification logits ($z_P \in \mathbb{R}^2$ ) without secondary model roundtrips (<15 ms).
 * **Phase II: Parallel Inbound Risk Tiers ($L_1 - L_4$):** Evaluates privacy entity density ($L_1$, Microsoft Presidio NER), latent intent classification ($L_2$, dual-headed Softmax), angular semantic manifold divergence against a tenant policy centroid $\mu_\pi$ ($L_3$ ), and context length saturation ($L_4$ ).
-* **Theoretical Robustness Guarantee (Theorem 1):** PyTorch Spectral Normalization enforces a certified local $K$-Lipschitz continuity bound on the composite decision score:
-  $$\Delta S \le w_3 \frac{K}{\pi \|\mu_\pi\|_2} + w_2 L_\sigma \|\delta\|_2$$
+* **Theoretical Robustness Guarantee (Theorem 1):** PyTorch Spectral Normalization enforces a certified local K-Lipschitz continuity bound on the composite decision score: ΔS ≤ w₃ · (K / (π ||μ_π||₂)) + w₂ · L_σ ||δ||₂.
 * **Phase IV: Closed-Loop Forensic Outbound Defense ($L_5$):** Employs an $\mathcal{O}(1)$ Aho-Corasick automaton tracking dynamic session canaries ($\kappa$ ) across Raw UTF-8, Base64, Hexadecimal, and Rot13 representations to guarantee 0.0% system prompt leakage.
 
 ---
