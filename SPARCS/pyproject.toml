@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sparcs"
+version = "0.1.0"
+description = "SPARCS reviewer-reproducible security middleware"
+requires-python = ">=3.10"
+dependencies = [
+  "torch>=2.2",
+  "transformers>=4.45",
+  "datasets>=2.20",
+  "scikit-learn>=1.4",
+  "numpy>=1.26",
+  "pyyaml>=6.0",
+  "presidio-analyzer>=2.2",
+  "onnx>=1.16",
+  "onnxruntime>=1.18",
+  "sentencepiece>=0.2",
+  "accelerate>=0.33"
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "fastapi>=0.110", "uvicorn>=0.29"]
+train = ["evaluate>=0.4"]
+export = ["optimum[onnxruntime]>=1.21"]
+plots = ["matplotlib>=3.8"]
+
+[tool.setuptools.packages.find]
+include = ["sparcs*"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+addopts = "-ra"

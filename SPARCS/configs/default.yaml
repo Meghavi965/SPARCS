@@ -1,0 +1,41 @@
+model:
+  name: microsoft/deberta-v3-base
+  num_labels: 2
+  max_length: 512
+  pooling: masked_mean
+risk:
+  weights: [0.30, 0.35, 0.25, 0.10]
+  threshold: 0.45  # replaced by calibration artifact before benchmark runs
+  l1_saturation: 1.0
+  l4_max_tokens: 512
+  l3_temperature: 1.0
+  centroid_path: artifacts/policy_centroid.pt
+privacy:
+  enabled: true
+  entities: [EMAIL_ADDRESS, PHONE_NUMBER, US_SSN, CREDIT_CARD, IP_ADDRESS, URL]
+canary:
+  enabled: true
+  encodings: [raw, base64, hex, rot13]
+  window_chars: 4096
+training:
+  seed: 42
+  batch_size: 8
+  eval_batch_size: 16
+  epochs: 3
+  learning_rate: 2.0e-5
+  weight_decay: 0.01
+  warmup_ratio: 0.06
+  grad_accum: 4
+  max_grad_norm: 1.0
+  save_every_steps: 250
+  eval_every_epochs: 1
+  output_dir: artifacts/checkpoint
+runtime:
+  device: auto
+  num_workers: 2
+  torch_threads: 8
+  mixed_precision: fp16  # set to none for full-precision training
+benchmark:
+  warmup: 50
+  repeats: 1000
+  batch_size: 1
